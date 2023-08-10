@@ -1,58 +1,58 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct no {																//Declaração 
+struct no {											//DeclaraÃ§Ã£o 
 	int numero;
-	struct no *proximo;													//Proximo número do nó (ponteiro proximo)
+	struct no *proximo;									//Proximo nÃºmero do nÃ³ (ponteiro proximo)
 };
 
-struct no *cabeca = NULL;												//Número cabeça do nó (ponteiro apontando para nada)
+struct no *cabeca = NULL;									//NÃºmero cabeÃ§a do nÃ³ (ponteiro apontando para nada)
 
-void inserir(int parametroNumero) {										//Função void(retornar nada) que insere números no nó
-	struct no *novoNo = (struct no *) malloc(sizeof(struct no));		//malloc = abre o espaço de memória para o ponteiro do tamanho do nó
-	novoNo -> numero = parametroNumero;									//adiciona o valor ao número do ponteiro
-	novoNo -> proximo = NULL;											//adiciona o valor ao próximo número do nó
+void inserir(int parametroNumero) {								//FunÃ§Ã£o void(retornar nada) que insere nÃºmeros no nÃ³
+	struct no *novoNo = (struct no *) malloc(sizeof(struct no));				//malloc = abre o espaÃ§o de memÃ³ria para o ponteiro do tamanho do nÃ³
+	novoNo -> numero = parametroNumero;							//adiciona o valor ao nÃºmero do ponteiro
+	novoNo -> proximo = NULL;								//adiciona o valor ao prÃ³ximo nÃºmero do nÃ³
 	
-	if (cabeca == NULL) {												//se a lista estiver vazia
-		cabeca = novoNo;												//adiciona o ponteiro cabeca na lista (simples)
-	} else {															//se a lista já tem algum nó (o cabeca não muda)
+	if (cabeca == NULL) {									//se a lista estiver vazia
+		cabeca = novoNo;								//adiciona o ponteiro cabeca na lista (simples)
+	} else {										//se a lista jÃ¡ tem algum nÃ³ (o cabeca nÃ£o muda)
 		struct no *ponteiro;
 		
-		ponteiro = cabeca;												//variavel ponteiro apontando para o mesmo lugar que o ponteiro cabeca aponta
+		ponteiro = cabeca;								//variavel ponteiro apontando para o mesmo lugar que o ponteiro cabeca aponta
 		while (ponteiro -> proximo != NULL) {
-			ponteiro = ponteiro -> proximo;								//aponta para o próximo número da lista, caso o elemento próximo não for nulo
+			ponteiro = ponteiro -> proximo;						//aponta para o prÃ³ximo nÃºmero da lista, caso o elemento prÃ³ximo nÃ£o for nulo
 		}
-		ponteiro -> proximo = novoNo;									//adiciona o novoNo para o ponteiro proximo (finalmente)
+		ponteiro -> proximo = novoNo;							//adiciona o novoNo para o ponteiro proximo (finalmente)
 	}
 }
 
-void imprimir() {														//funcao para imprimir
+void imprimir() {										//funcao para imprimir
 	struct no *ponteiro;
 	
 	ponteiro = cabeca;
-	while (ponteiro != NULL) {											//enquanto ainda existir um próximo nó ele imprime o atual
+	while (ponteiro != NULL) {								//enquanto ainda existir um prÃ³ximo nÃ³ ele imprime o atual
 		printf("%d\n", ponteiro -> numero);
 		ponteiro = ponteiro -> proximo;
 	}
 }
 
-void remover(int parametroNumero) {										//função para remover um nó da lista
+void remover(int parametroNumero) {								//funÃ§Ã£o para remover um nÃ³ da lista
 	struct no *ponteiroExcluir;
 	struct no *ponteiroAnterior;
 	
-	if (cabeca -> numero == parametroNumero) {							//caso fácil de remover o primeiro nó da lista
-		ponteiroExcluir = cabeca;										//aponta para o primeiro
-		cabeca = cabeca -> proximo;										//aponta para o proximo
-		free(ponteiroExcluir);											//remove o primeiro
-	} else {															//caso difícil de remover no meio da lista
-		ponteiroAnterior = cabeca;											//aponta para o primeiro
+	if (cabeca -> numero == parametroNumero) {						//caso fÃ¡cil de remover o primeiro nÃ³ da lista
+		ponteiroExcluir = cabeca;							//aponta para o primeiro
+		cabeca = cabeca -> proximo;							//aponta para o proximo
+		free(ponteiroExcluir);								//remove o primeiro
+	} else {										//caso difÃ­cil de remover no meio da lista
+		ponteiroAnterior = cabeca;							//aponta para o primeiro
 		while ((ponteiroAnterior -> proximo != NULL) && 
-			(ponteiroAnterior -> proximo -> numero != parametroNumero)){	//proximo número for diferente do elemento remover
+			(ponteiroAnterior -> proximo -> numero != parametroNumero)){		//proximo nÃºmero for diferente do elemento remover
 			
-			ponteiroAnterior = ponteiroAnterior -> proximo; 				//cabeca vira o proximo
+			ponteiroAnterior = ponteiroAnterior -> proximo; 			//cabeca vira o proximo
 		}
-		if (ponteiroAnterior -> proximo != NULL) {							//se o último elemento for não nulo
-			ponteiroExcluir = ponteiroAnterior -> proximo;					//ponteiroexcluir vira o proximo 
+		if (ponteiroAnterior -> proximo != NULL) {					//se o Ãºltimo elemento for nÃ£o nulo
+			ponteiroExcluir = ponteiroAnterior -> proximo;				//ponteiroexcluir vira o proximo 
 			ponteiroAnterior -> proximo = ponteiroExcluir -> proximo;		//o proximo vira o proximo do ponteiroexcluir
 			free(ponteiroExcluir);
 		}				
@@ -61,7 +61,7 @@ void remover(int parametroNumero) {										//função para remover um nó da list
 
 
 
-int main() {															//funçao principal
+int main() {											//funÃ§ao principal
 	int i;
 	
 	for (i=0; i<10; i++){
