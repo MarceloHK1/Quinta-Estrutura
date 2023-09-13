@@ -8,7 +8,7 @@ struct no {
 
 struct no *cabeca = NULL;
 
-void push(int x) {															//função para inserir um nó
+void push(int x) {															//funÃ§Ã£o para inserir um nÃ³
 	struct no *novoNo = (struct no *) malloc(sizeof(struct no));
 	novoNo -> numero = x;
 	novoNo -> proximo = NULL;
