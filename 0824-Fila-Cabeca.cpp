@@ -25,7 +25,7 @@ int remover() {
 			retorno = cabeca -> numero;
 			free(cabeca);
 			cabeca = NULL;
-		} else {															//mais de um nó na fila
+		} else {															//mais de um nÃ³ na fila
 			struct no *ponteiro = cabeca;
 			
 			while (ponteiro -> proximo -> proximo != NULL) {
