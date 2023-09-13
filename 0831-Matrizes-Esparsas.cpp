@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//DeclaraÁ„o de constantes
+//Declara√ß√£o de constantes
 const int MODULO = 16;
 
-//DeclaraÁ„o de estruturas
+//Declara√ß√£o de estruturas
 struct no {
 	int numero;
 	struct no *proximoNo;
@@ -16,53 +16,53 @@ struct diretor {
 	struct no *proximoNo;	
 };
 
-//DeclaraÁ„o de v·riaveis
+//Declara√ß√£o de v√°riaveis
 struct diretor *cabeca = NULL;
 
-//FunÁ„o que procura um diretor
+//Fun√ß√£o que procura um diretor
 struct diretor *procurarDiretor(int resto) {						//retorna um ponteiro para diretor
 	struct diretor *ponteiro = cabeca;
 	while ((ponteiro != NULL) && (ponteiro -> resto != resto)) {
 		ponteiro = ponteiro -> proximoDiretor;
 	}
-	if (ponteiro == NULL) {											//n„o foi encontrado o diretor com valor igual ao procurado(lista vazia)
+	if (ponteiro == NULL) {											//n√£o foi encontrado o diretor com valor igual ao procurado(lista vazia)
 		ponteiro = (struct diretor *) malloc(sizeof(struct diretor));
 		ponteiro -> resto = resto;									//resto do ponteiro vira o valor
 		ponteiro -> proximoNo = NULL;								//ponteiro aponta para nada
-		ponteiro -> proximoDiretor = cabeca;						//proximoDiretor È cabeca(nada)
+		ponteiro -> proximoDiretor = cabeca;						//proximoDiretor √© cabeca(nada)
 		cabeca = ponteiro;											//cabeca vira o ponteiro
 	}
 	return ponteiro;
 }
 
-//FunÁ„o que insere um nÛ na matriz esparsa
+//Fun√ß√£o que insere um n√≥ na matriz esparsa
 void inserir(int numero) {
 	struct diretor *ponteiroDiretor = procurarDiretor(numero % MODULO);
 	struct no *novoNo = (struct no *) malloc(sizeof(struct no));
 	novoNo -> numero = numero;
-	novoNo -> proximoNo = ponteiroDiretor -> proximoNo;				//o novo nÛ aponta para o proximo do diretor
-	ponteiroDiretor -> proximoNo = novoNo;							//o diretor aponta para o novo nÛs
+	novoNo -> proximoNo = ponteiroDiretor -> proximoNo;				//o novo n√≥ aponta para o proximo do diretor
+	ponteiroDiretor -> proximoNo = novoNo;							//o diretor aponta para o novo n√≥s
 }
 
-//FunÁ„o que imprime a matriz esparsa
+//Fun√ß√£o que imprime a matriz esparsa
 void imprimir() {
-	struct diretor *ponteiroDiretor = cabeca;						//sendo a cabeÁa
+	struct diretor *ponteiroDiretor = cabeca;						//sendo a cabe√ßa
 	printf("============ Matriz Esparsa ================\n");
 	
-	while (ponteiroDiretor != NULL) {								//se cabeca n„o for nula
-		struct no *ponteiroNo = ponteiroDiretor -> proximoNo;		//o nÛ  vira o prÛximo nÛ desse mesmo diretor
+	while (ponteiroDiretor != NULL) {								//se cabeca n√£o for nula
+		struct no *ponteiroNo = ponteiroDiretor -> proximoNo;		//o n√≥  vira o pr√≥ximo n√≥ desse mesmo diretor
 		printf("%d:\t", ponteiroDiretor -> resto);					//printa o resto/diretor
 		
-		while (ponteiroNo != NULL) {								//enquanto o no n„o for nulo
-			printf("%d\t", ponteiroNo -> numero);					//printa o n˙mero do nÛ
-			ponteiroNo = ponteiroNo -> proximoNo;					//passa para o prÛximo nÛ
+		while (ponteiroNo != NULL) {								//enquanto o no n√£o for nulo
+			printf("%d\t", ponteiroNo -> numero);					//printa o n√∫mero do n√≥
+			ponteiroNo = ponteiroNo -> proximoNo;					//passa para o pr√≥ximo n√≥
 		}
 		printf("\n");
-		ponteiroDiretor = ponteiroDiretor -> proximoDiretor;			//passa para o prÛximo diretor
+		ponteiroDiretor = ponteiroDiretor -> proximoDiretor;			//passa para o pr√≥ximo diretor
 	}
 }
 
-//FunÁ„o que remove
+//Fun√ß√£o que remove
 void remover(int numero) {
 	struct diretor *ponteiroDiretor = procurarDiretor(numero % MODULO);
 	
