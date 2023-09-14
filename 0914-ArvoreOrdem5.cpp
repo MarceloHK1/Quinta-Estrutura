@@ -1,12 +1,13 @@
-//Estrutura de dados n„o linear
+//Estrutura de dados n√£o linear
 //Aumenta as performances de busca, por meio de algoritmos recursivos
-//Organizada de forma hier·rquica
+//Organizada de forma hier√°rquica
 //Elemento raiz, ligadas a outros elementos chamados filhos
-//Os filhos podem ter outrso filhos, caso n„o tenham s„o chamadas folhas
-//Os nÛs sem ser a raiz formam conjuntos disjuntos chamados de sub·rvore
+//Os filhos podem ter outrso filhos, caso n√£o tenham s√£o chamadas folhas
+//Os n√≥s sem ser a raiz formam conjuntos disjuntos chamados de sub√°rvore
 
-//Ordem = quantidade de filhos dos nÛs da ·rvore
-//
+//Ordem = quantidade de filhos dos n√≥s da √°rvore
+//N√≠vel = dist√¢ncia entre um n√≥ e a raiz
+//Altura = maior n√≠vel entre todas as folhas da √°rvore + 1
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,8 +23,8 @@ struct no {
 	struct no *filho5;
 };
 
-struct no *inserir (struct no *raiz, int number) {															//FunÁ„o para inserir um nÛ na ·rvore
-	if (raiz == NULL) {																						//Se a ·rvore estiver vazia
+struct no *inserir (struct no *raiz, int number) {															//Fun√ß√£o para inserir um n√≥ na √°rvore
+	if (raiz == NULL) {																						//Se a √°rvore estiver vazia
 		raiz = (struct no *) malloc(sizeof(struct no));
 		
 		raiz -> numero = number;
@@ -32,11 +33,11 @@ struct no *inserir (struct no *raiz, int number) {															//FunÁ„o para i
 		raiz -> filho3 = NULL;
 		raiz -> filho4 = NULL;
 		raiz -> filho5 = NULL;
-	} else {																								//Se a ·rvore n„o estiver vazia
-		int sorteio = (rand() % 5);																			//Resto de um n˙mero aleatÛrio / qntd de filhos
+	} else {																								//Se a √°rvore n√£o estiver vazia
+		int sorteio = (rand() % 5);																			//Resto de um n√∫mero aleat√≥rio / qntd de filhos
 		
-		if (sorteio == 0) {																					//funÁ„o recursiva atÈ achar um nÛ vazio
-			raiz -> filho1 = inserir(raiz -> filho1, number);												//insere no filho1 o n˙mero
+		if (sorteio == 0) {																					//fun√ß√£o recursiva at√© achar um n√≥ vazio
+			raiz -> filho1 = inserir(raiz -> filho1, number);												//insere no filho1 o n√∫mero
 		} else if (sorteio == 1) {
 			raiz -> filho2 = inserir(raiz -> filho2, number);											
 		} else if (sorteio == 2) {
@@ -50,7 +51,7 @@ struct no *inserir (struct no *raiz, int number) {															//FunÁ„o para i
 	return raiz;
 }
 
-void imprimir(struct no *raiz, char *endentacao) {															//FunÁ„o que imprime a ·rvore
+void imprimir(struct no *raiz, char *endentacao) {															//Fun√ß√£o que imprime a √°rvore
 	if (raiz != NULL) {
 		printf("%s%d\n", endentacao, raiz -> numero);	
 		
@@ -67,20 +68,36 @@ void imprimir(struct no *raiz, char *endentacao) {															//FunÁ„o que im
 }
 
 int main () {
-	struct no *raiz = NULL;																					//DeclaraÁ„o de vari·veis
+	struct no *raiz = NULL;																					//Declara√ß√£o de vari√°veis
 	time_t t;
 	char *endentacao = (char *) malloc(1024 * sizeof(char));
 	
-	srand((unsigned) time(&t));																				//InicializaÁ„o da aleatoriedade
+	srand((unsigned) time(&t));																				//Inicializa√ß√£o da aleatoriedade
 	
 	strcpy(endentacao, "");
-	imprimir(raiz, endentacao);
+
 	
-	int i = 0;
-	for (i = 0; i<10000; i++) {
-		raiz = inserir(raiz, i);
+	int opcao = 0;
+	while (opcao != 3) {
+		printf("==================================\n");
+		printf("|                Menu            |\n");
+		printf("==================================\n");
+		printf("|         1 - Inserir            !\n");
+		printf("|         2 - Imprimir           !\n");
+		printf("|         3 - Sair               !\n");
+		printf("==================================\n");
+		
+		printf("Digite a op√ß√£o: ");
+		scanf("%d", &opcao);
+		
+		if (opcao == 1) {
+			int number = 0;
+			printf("Digite o numero: ");
+			scanf("%d", &number);
+			raiz = inserir(raiz, number);
+		} else if (opcao == 2) {
+			imprimir(raiz, endentacao);
+		}
 	}
-	
-	imprimir(raiz, endentacao);
 }
 
